@@ -172,6 +172,8 @@ class TestClass:
 
     def test_contact_us_page(self, get_telerik_site):
 
+        #Kommentar
+
         driver = get_telerik_site
 
         contact_us_link = driver.find_element(By.XPATH, "/html/body/div[2]/footer/div/div[1]/div[2]/div[1]/div[4]/ul/li[1]/a")

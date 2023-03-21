@@ -138,8 +138,6 @@ class TestClass:
 
     def test_more_about_devcraft(self, get_telerik_site):
 
-        
-
         driver =get_telerik_site
 
         devcraft_link = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[4]/div[1]/div[2]/div[1]/div/div/div[2]/a")

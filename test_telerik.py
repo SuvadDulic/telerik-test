@@ -1,9 +1,11 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pytest
+from selenium.webdriver.common.keys import Keys
 import time
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 
 # Constants
 # -----------------------------------------------------------------------------------------------------------------------------------------------
@@ -160,13 +162,24 @@ class TestClass:
 
     def test_more_about_devcraft(self, get_telerik_site):
 
-        driver =get_telerik_site
+        driver = get_telerik_site
 
         devcraft_link = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[4]/div[1]/div[2]/div[1]/div/div/div[2]/a")
 
         devcraft_link.click()
 
         boolean_assert("devcraft" in driver.current_url, f"Expected devcraft in url, got: {driver.current_url}")
+
+    def test_contact_us_page(self, get_telerik_site):
+
+        driver = get_telerik_site
+
+        contact_us_link = driver.find_element(By.XPATH, "/html/body/div[2]/footer/div/div[1]/div[2]/div[1]/div[4]/ul/li[1]/a")
+
+        contact_us_link.click()
+        
+        boolean_assert("contact" in driver.current_url, f"Expected contact in url, got: {driver.current_url}")
+
 
     
 

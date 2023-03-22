@@ -67,7 +67,8 @@ class TestClass:
         # Load Selenium webdriver
         driver = get_telerik_site
 
-        boolean_assert("telerik" in driver.current_url, f"Expected telerik in url, got: {driver.current_url}")
+        boolean_assert("telerik" in driver.current_url, f"Expected telerik \
+        in url, got: {driver.current_url}")
 
     def test_telerik_demos_url(self, get_telerik_site):
         driver = get_telerik_site
@@ -80,45 +81,31 @@ class TestClass:
         # Navigate to demos page
         demos_link.click()
 
-        boolean_assert("demos" in driver.current_url, f"Expected demos in url, got: {driver.current_url}")
-
-    def test_telerik_search(self, get_telerik_site):
-
-        driver = get_telerik_site
-        # Set the browser window on fullscreen mode
-        # driver.fullscreen_window()
-        # Find link for search function on site
-        search_link = driver.find_element(By.CSS_SELECTOR, "#js-tlrk-nav-search-wrapper")
-        # Go to search page on telerik website
-        search_link.click()
-        # Assert that search is part of the search page url 
-        boolean_assert("search" in driver.current_url, f"Expected search in url, got: {driver.current_url}")
-        # # Find header which contains text "Search"
-        # section = driver.find_element(By.XPATH, "/html/body/div[2]/div/section[1]/div/div/div/h2")
-        # # Assert that header reads "Search"
-        # simple_assert(section.text, "Searc")
+        boolean_assert("demos" in driver.current_url, f"Expected demos in url,\
+                         got: {driver.current_url}")
 
     def test_search_page(self, get_telerik_site):
 
         driver = get_telerik_site
 
-        driver.get("https://www.telerik.com/search")
+        # driver.get("https://www.telerik.com/search")
+        
+        # Find link for search function on site
+        search_link = driver.find_element(By.CSS_SELECTOR, "#js-tlrk-nav-search-wrapper")
 
-        # driver.fullscreen_window()
-        # # Find link for search function on site
-        # search_link = driver.find_element(By.CSS_SELECTOR, "#js-tlrk-nav-search-wrapper")
-
-        # search_link.click()
-
-        section = driver.find_element(By.XPATH, "/html/body/div[2]/div/section[1]/div/div/div/h2")
-
+        search_link.click()
+        # Find header which contains text "Search"
+        section = driver.find_element(By.XPATH, \
+                            "/html/body/div[2]/div/section[1]/div/div/div/h2")
+        # Assert that header reads "Search"
         simple_assert(section.text, "Search")
 
     def test_search_func(self, get_telerik_site):
 
         driver = get_telerik_site
         # Find link for search function on site
-        search_link = driver.find_element(By.CSS_SELECTOR, "#js-tlrk-nav-search-wrapper")
+        search_link = driver.find_element(By.CSS_SELECTOR, \
+            "#js-tlrk-nav-search-wrapper")
 
         search_link.click()
 
@@ -182,7 +169,50 @@ class TestClass:
         
         boolean_assert("contact" in driver.current_url, f"Expected contact in url, got: {driver.current_url}")
 
+    def test_go_to_pricing_page(self, get_telerik_site):
 
-    
+        driver = get_telerik_site
 
-        
+        pricing_page_link = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[1]/nav/section/div/div[1]/ul[1]/li[5]/a")
+
+        pricing_page_link.click()
+
+        pricing_header = driver.find_element(By.LINK_TEXT, "Pricing")
+
+        simple_assert(pricing_header.text, "Pricing")
+
+    def test_put_in_shopping_cart(self, get_telerik_site):
+
+        driver = get_telerik_site
+
+        pricing_page_link = driver.find_element(By.CSS_SELECTOR, \
+        "#js-tlrk-nav-drawer > ul.TK-Context-Menu.TK-Menu > li:nth-child(5) > a")
+
+        pricing_page_link.click()
+
+        devcraft_ui_buy_link = driver.find_element(By.XPATH, \
+        "/html/body/div[2]/div[1]/div[1]/div[1]/div/div/div[1]/table/thead/tr[5]/th[1]/div/a")
+
+        # popup_accept = driver.find_element(By.XPATH, \
+        # "/html/body/div[3]/div[2]/div/div[1]/div/div[2]/div/button[2]")
+
+        # popup_accept.click()
+
+        devc_ui_price_price_page = driver.find_element(By.XPATH, \
+        "/html/body/div[2]/div[1]/div[1]/div[1]/div/div/div[1]/table/thead/tr[4]/th[1]/div/h3/span[2]")
+
+        price_text_pricing_page = devc_ui_price_price_page.text
+
+        devcraft_ui_buy_link.click()
+
+        popup_accept_2 = driver.find_element(By.XPATH, \
+        "/html/body/div[2]/div[2]/div/div[1]/div/div[2]/div/button[2]")
+
+        popup_accept_2.click()
+
+        devc_ui_price_shopping_page = driver.find_element(By.XPATH, \
+        "//*[@id='801']/td[2]/div[1]/span[2]/span")
+
+        boolean_assert(price_text_pricing_page in devc_ui_price_shopping_page.text, \
+        f"Expected same price in link text")
+            

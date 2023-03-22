@@ -159,8 +159,6 @@ class TestClass:
 
     def test_contact_us_page(self, get_telerik_site):
 
-        #Kommentar
-
         driver = get_telerik_site
 
         contact_us_link = driver.find_element(By.XPATH, "/html/body/div[2]/footer/div/div[1]/div[2]/div[1]/div[4]/ul/li[1]/a")
@@ -190,13 +188,14 @@ class TestClass:
 
         pricing_page_link.click()
 
+        footer = driver.find_element(By.XPATH, "/html/body/nav")
+        scroll_origin = ScrollOrigin.from_element(footer)
+        ActionChains(driver)\
+        .scroll_from_origin(scroll_origin, 0, 400)\
+        .perform()
+
         devcraft_ui_buy_link = driver.find_element(By.XPATH, \
         "/html/body/div[2]/div[1]/div[1]/div[1]/div/div/div[1]/table/thead/tr[5]/th[1]/div/a")
-
-        # popup_accept = driver.find_element(By.XPATH, \
-        # "/html/body/div[3]/div[2]/div/div[1]/div/div[2]/div/button[2]")
-
-        # popup_accept.click()
 
         devc_ui_price_price_page = driver.find_element(By.XPATH, \
         "/html/body/div[2]/div[1]/div[1]/div[1]/div/div/div[1]/table/thead/tr[4]/th[1]/div/h3/span[2]")
@@ -205,14 +204,49 @@ class TestClass:
 
         devcraft_ui_buy_link.click()
 
-        popup_accept_2 = driver.find_element(By.XPATH, \
-        "/html/body/div[2]/div[2]/div/div[1]/div/div[2]/div/button[2]")
+        # popup_accept_2 = driver.find_element(By.XPATH, \
+        # "/html/body/div[2]/div[2]/div/div[1]/div/div[2]/div/button[2]")
 
-        popup_accept_2.click()
+        # popup_accept_2.click()
 
         devc_ui_price_shopping_page = driver.find_element(By.XPATH, \
         "//*[@id='801']/td[2]/div[1]/span[2]/span")
 
         boolean_assert(price_text_pricing_page in devc_ui_price_shopping_page.text, \
         f"Expected same price in link text")
+
+    def test_go_to_blogs_page(self, get_telerik_site):
+
+        driver = get_telerik_site
+
+        blogs_link = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[1]/nav/section/div/div[1]/ul[1]/li[3]/a")
+
+        blogs_link.click()
+
+        boolean_assert("blogs" in driver.current_url, f"Expected blogs in url, got: {driver.current_url}")
+
+    def test_first_blog(self, get_telerik_site):
+
+        driver = get_telerik_site
+
+        blogs_link = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[1]/nav/section/div/div[1]/ul[1]/li[3]/a")
+
+        blogs_link.click()
+
+        footer = driver.find_element(By.XPATH, "/html/body/nav")
+        scroll_origin = ScrollOrigin.from_element(footer)
+        ActionChains(driver)\
+        .scroll_from_origin(scroll_origin, 0, 500)\
+        .perform()
+
+        first_blog_link = driver.find_element(By.XPATH, "//*[@id='ContentPlaceholder1_C146_Col00']/div/div[2]/h2/a")
+
+        first_blog_link.click()
+
+        first_blog_header = driver.find_element(By.XPATH, "/html/body/div[2]/div/section/div/div/h1/span")
+
+        boolean_assert("March 2023 Telerik" in first_blog_header.text, \
+        f"Expected March 2023 Telerik as header for blog, got: {first_blog_header.text}")
+
+
             

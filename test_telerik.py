@@ -250,5 +250,16 @@ class TestClass:
         boolean_assert("March 2023 Telerik" in first_blog_header.text, \
         f"Expected March 2023 Telerik as header for blog, got: {first_blog_header.text}")
 
+    def test_docs_support_page(self, get_telerik_site):
+
+        driver = get_telerik_site
+
+        docs_supp_link = driver.find_element(By.CSS_SELECTOR, \
+            "#js-tlrk-nav-drawer > ul.TK-Context-Menu.TK-Menu > li:nth-child(4) > a")
+
+        docs_supp_link.click()
+
+        boolean_assert("support" in driver.current_url, f"Expected support in url, got: {driver.current_url}")
+
 
             

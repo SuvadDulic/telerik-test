@@ -191,7 +191,7 @@ class TestClass:
         footer = driver.find_element(By.XPATH, "/html/body/nav")
         scroll_origin = ScrollOrigin.from_element(footer)
         ActionChains(driver)\
-        .scroll_from_origin(scroll_origin, 0, 400)\
+        .scroll_from_origin(scroll_origin, 0, 450)\
         .perform()
 
         devcraft_ui_buy_link = driver.find_element(By.XPATH, \

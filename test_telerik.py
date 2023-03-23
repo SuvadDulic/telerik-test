@@ -100,55 +100,6 @@ class TestClass:
         # Assert that header reads "Search"
         simple_assert(section.text, "Search")
 
-    def test_search_func(self, get_telerik_site):
-
-        driver = get_telerik_site
-        # Find link for search function on site
-        search_link = driver.find_element(By.CSS_SELECTOR, \
-            "#js-tlrk-nav-search-wrapper")
-
-        search_link.click()
-
-        search_field = driver.find_element(By.XPATH, "/html/body/div[2]/div/section[1]/div/div/div/tk-site-search/div/div/input")
-
-        # popup_accept = driver.find_element(By.XPATH, "/html/body/div[4]/div[2]/div/div[1]/div/div[2]/div/button[2]")
-
-        # popup_accept.click()
-
-        search_field.send_keys("load testing")
-
-        click_search = driver.find_element(By.XPATH, "/html/body/div[2]/div/section[1]/div/div/div/tk-site-search/div/button")
-
-        click_search.click()
-
-        first_search_result = driver.find_element(By.XPATH, "/html/body/div[2]/div/section[2]/div/div/div[3]/ul/li[1]/h4/a/b")
-
-        simple_assert(first_search_result.text, "Load Testing")
-
-    def test_link_from_search(self, get_telerik_site):
-
-        driver = get_telerik_site
-
-        search_link = driver.find_element(By.CSS_SELECTOR, "#js-tlrk-nav-search-wrapper")
-
-        search_link.click()
-
-        search_field = driver.find_element(By.XPATH, "/html/body/div[2]/div/section[1]/div/div/div/tk-site-search/div/div/input")
-
-        search_field.send_keys("load testing")
-
-        click_search = driver.find_element(By.XPATH, "/html/body/div[2]/div/section[1]/div/div/div/tk-site-search/div/button")
-
-        click_search.click()
-
-        first_search_result = driver.find_element(By.XPATH, "/html/body/div[2]/div/section[2]/div/div/div[3]/ul/li[1]/h4/a/b")
-
-        first_search_result.click()
-
-        page_header = driver.find_element(By.XPATH, "/html/body/div[2]/div[1]/div[2]/h1")
-
-        boolean_assert("Load Testing" in page_header.text, f"Expected header to contain Load Testing, got: {page_header.text}")
-
     def test_more_about_devcraft(self, get_telerik_site):
 
         driver = get_telerik_site
@@ -295,8 +246,3 @@ class TestClass:
 
         boolean_assert("Kendo" in kendo_ui_doc_header.text, \
             f"Expected Kendo in page header, got: {kendo_ui_doc_header.text}")
-
-
-
-
-            

@@ -67,7 +67,7 @@ class TestClass:
         # Load Selenium webdriver
         driver = get_telerik_site
 
-        boolean_assert("telerikk" in driver.current_url, f"Expected telerik \
+        boolean_assert("telerik" in driver.current_url, f"Expected telerik \
         in url, got: {driver.current_url}")
 
     def test_telerik_demos_url(self, get_telerik_site):

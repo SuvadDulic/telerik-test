@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone repository from GitHub'){
             steps {
-                checkout scmGit(branches: [[name: '**']], extensions: [], url: 'https://github.com/SuvadDulic/telerik-test'])
+                checkout scmGit(branches: [[name: '**']], extensions: [], url: 'https://github.com/SuvadDulic/telerik-test')
                 }
             }
 	  stage('Testing GitHub-tests locally') {

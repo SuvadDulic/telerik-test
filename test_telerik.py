@@ -67,7 +67,7 @@ class TestClass:
         # Load Selenium webdriver
         driver = get_telerik_site
 
-        boolean_assert("telerik" in driver.current_url, f"Expected telerik \
+        boolean_assert("telerikk" in driver.current_url, f"Expected telerik \
         in url, got: {driver.current_url}")
 
     def test_telerik_demos_url(self, get_telerik_site):
@@ -145,7 +145,9 @@ class TestClass:
 
         first_search_result.click()
 
-        boolean_assert("load-testing" in driver.current_url, f"Expected load-testing in url, got: {driver.current_url}")
+        page_header = driver.find_element(By.XPATH, "/html/body/div[2]/div[1]/div[2]/h1")
+
+        boolean_assert("Load Testing" in page_header.text, f"Expected header to contain Load Testing, got: {page_header.text}")
 
     def test_more_about_devcraft(self, get_telerik_site):
 

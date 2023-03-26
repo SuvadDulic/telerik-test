@@ -260,6 +260,35 @@ class TestClass:
         docs_supp_link.click()
 
         boolean_assert("support" in driver.current_url, f"Expected support in url, got: {driver.current_url}")
+    
+    def test_kendoui_doc(self, get_telerik_site):
 
+        driver = get_telerik_site
 
-            
+        docs_supp_link = driver.find_element(By.CSS_SELECTOR, \
+            "#js-tlrk-nav-drawer > ul.TK-Context-Menu.TK-Menu > li:nth-child(4) > a")
+
+        docs_supp_link.click()
+
+        kendo_ui_link = driver.find_element(\
+            By.CSS_SELECTOR, \
+            "#ContentPlaceholder1_C002_Col00 > div > div > div:nth-child(1) > ul:nth-child(2) > li:nth-child(1) > a")
+
+        kendo_ui_link.click()
+
+        footer = driver.find_element(By.XPATH, "/html/body/nav/section")
+        scroll_origin = ScrollOrigin.from_element(footer)
+        ActionChains(driver)\
+        .scroll_from_origin(scroll_origin, 0, 600)\
+        .perform()
+
+        kendo_ui_doc_link = driver.find_element(By.XPATH, \
+            "/html/body/div[2]/section[1]/div/div[1]/div[2]/div[2]/ul/li[1]/a")
+
+        kendo_ui_doc_link.click()
+
+        kendo_ui_doc_header = driver.find_element(By.XPATH, \
+            "/html/body/div[3]/div[2]/div/div[2]/div/div/article/h1/a")
+
+        boolean_assert("Kendo" in kendo_ui_doc_header.text, \
+            f"Expected Kendo in page header, got: {kendo_ui_doc_header.text}")

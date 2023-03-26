@@ -54,7 +54,7 @@ class TestClass:
 
         driver = load_driver
 
-        # Load iceberry website
+        # Load telerik website
         driver.get(TELERIK_SITE)
 
         yield driver
@@ -71,24 +71,20 @@ class TestClass:
         in url, got: {driver.current_url}")
 
     def test_telerik_demos_url(self, get_telerik_site):
+
         driver = get_telerik_site
-
-        # driver.fullscreen_window()
         
-
         # Find demos page link
         demos_link = driver.find_element(By.LINK_TEXT, "DEMOS") 
         # Navigate to demos page
         demos_link.click()
-
+        # Assert that demos is part of the url
         boolean_assert("demos" in driver.current_url, f"Expected demos in url,\
                          got: {driver.current_url}")
 
     def test_search_page(self, get_telerik_site):
 
         driver = get_telerik_site
-
-        # driver.get("https://www.telerik.com/search")
         
         # Find link for search function on site
         search_link = driver.find_element(By.CSS_SELECTOR, "#js-tlrk-nav-search-wrapper")
@@ -295,8 +291,3 @@ class TestClass:
 
         boolean_assert("Kendo" in kendo_ui_doc_header.text, \
             f"Expected Kendo in page header, got: {kendo_ui_doc_header.text}")
-
-
-
-
-            
